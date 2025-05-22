@@ -1,27 +1,36 @@
-# WDD 430 Team 6 Project - Full-Stack Force 
+# WDD 430 Team 6 Project - Full-Stack Force
 
 ## Team Members
- - Santiago Chaparro
- - Angela Pincock
- - Adonai Villalobos
+
+- Santiago Chaparro
+- Angela Pincock
+- Adonai Villalobos
+- Luismary Mariño
 
 ## Themes and Styling
 
 ### Framework
+
 - Tailwind
 
 ### Colors
+
 #### Mango Smoothie Palette
+
 - #F8EDEB
 - #FEC89A
 - #F1CEBE
 - #F49595
 - #FCD5CE
- 
+
 ### Typography
+
 #### Titles
+
 - Fredericka the Great
-####  Paragraphs
+
+#### Paragraphs
+
 - Arial, Helvetica, Sans-serif
 
 ```
@@ -35,5 +44,7 @@ Dashboard (Home Page, Top Products/Artists)
 ```
 
 ### Other
+
 #### Ideas
--   Wishlist
+
+- Wishlist
