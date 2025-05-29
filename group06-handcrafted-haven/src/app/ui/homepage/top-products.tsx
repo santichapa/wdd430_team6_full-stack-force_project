@@ -1,5 +1,5 @@
 import { frederickaTheGreat } from "@/app/ui/fonts";
-import Link from "next/link";
+import { ProductCard } from "@/app/ui/cards";
 
 export default async function TopProducts() {
   // functionality for showing products, uses fetch to obtain data and passes it down to the cards
@@ -13,22 +13,5 @@ export default async function TopProducts() {
         <ProductCard />
       </ul>
     </section>
-  );
-}
-
-export function ProductCard() {
-  //uses props to populate i.e title, image, description
-  return (
-    <li>
-      {/* link to product page */}
-      <Link href="#">
-        <div>
-          {/* Picture from product */}
-          <h3>Product title</h3>
-          <p>Product description</p>
-          {/* should artist name also appear? */}
-        </div>
-      </Link>
-    </li>
   );
 }

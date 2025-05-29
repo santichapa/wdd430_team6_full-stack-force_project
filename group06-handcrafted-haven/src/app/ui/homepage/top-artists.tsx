@@ -1,5 +1,5 @@
 import { frederickaTheGreat } from "@/app/ui/fonts";
-import Link from "next/link";
+import { ArtistCard } from "@/app/ui/cards";
 
 export default async function TopArtists() {
   // functionality for showing artists
@@ -13,17 +13,5 @@ export default async function TopArtists() {
         <ArtistCard />
       </ul>
     </section>
-  );
-}
-
-export function ArtistCard() {
-  return (
-    <li>
-      {/* link to the artists profile */}
-      <Link href="#">
-        {/* artist profile picture */}
-        <h3>Username</h3>
-      </Link>
-    </li>
   );
 }
