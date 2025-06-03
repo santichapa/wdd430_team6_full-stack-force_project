@@ -1,5 +1,5 @@
 import ProductsByArtist from "@/app/ui/artist/products-by-artist";
-import Image from "next/image";
+// import Image from "next/image";
 import { frederickaTheGreat } from "@/app/ui/fonts";
 
 export default async function Page() {
