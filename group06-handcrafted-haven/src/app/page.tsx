@@ -8,6 +8,7 @@ import { TopArtistsSkeleton, TopProductsSkeleton } from "@/app/ui/skeletons";
 export default function Home() {
   return (
     <main>
+
       <div className="hero">
         <Image
           src="/heroplaceholder.svg"
