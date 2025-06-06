@@ -1,16 +1,17 @@
 import { frederickaTheGreat } from "@/app/ui/fonts";
 import { ArtistCard } from "@/app/ui/cards";
+import { getAllArtists } from "@/app/lib/data";
 
 export default async function TopArtists() {
-  // functionality for showing artists
+  const artists = await getAllArtists();
+
   return (
     <section>
       <h2 className={`${frederickaTheGreat.className}`}>Top Artists</h2>
       <ul>
-        {/* .map artist card */}
-        <ArtistCard />
-        <ArtistCard />
-        <ArtistCard />
+        {artists.map((artist) => (
+          <ArtistCard key={artist.id} artist={artist} />
+        ))}
       </ul>
     </section>
   );
