@@ -3,12 +3,19 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import ProductReviewPage from "./ProductReviewPage";
 
-interface Props {
-  params: { id: string };
+export async function generateStaticParams() {
+  return products.map((product) => ({
+    id: product.id.toString(),
+  }));
 }
 
-export default function ProductPage({ params }: Props) {
-  const product = products.find((p) => p.id === Number(params.id));
+export default async function ProductPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  const product = products.find((p) => p.id === Number(id));
 
   if (!product) return notFound();
 

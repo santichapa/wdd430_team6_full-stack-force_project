@@ -2,28 +2,33 @@
 
 import { useState } from "react";
 
-export default function ReviewForm() {
-  const [review, setReview] = useState("");
+export default function ReviewForm({
+  onAddReview,
+}: {
+  onAddReview: (review: string) => void;
+}) {
+  const [text, setText] = useState("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    console.log("Submitted review:", review);
-    setReview("");
-  };
+    if (!text.trim()) return;
+    onAddReview(text.trim());
+    setText("");
+  }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="mb-4">
       <textarea
-        value={review}
-        onChange={(e) => setReview(e.target.value)}
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+        className="w-full border rounded p-2 mb-2"
         placeholder="Write your review..."
-        className="w-full border p-2 rounded"
       />
       <button
         type="submit"
-        className="mt-2 bg-black text-white px-4 py-2 rounded"
+        className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
       >
-        Submit
+        Submit Review
       </button>
     </form>
   );
