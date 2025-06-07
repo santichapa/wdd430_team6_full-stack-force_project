@@ -1,16 +1,17 @@
 import { frederickaTheGreat } from "@/app/ui/fonts";
 import { ProductCard } from "@/app/ui/cards";
+import { getTenProducts } from "@/app/lib/data";
 
 export default async function TopProducts() {
-  // functionality for showing products, uses fetch to obtain data and passes it down to the cards
+  const top10 = await getTenProducts();
+
   return (
     <section>
       <h2 className={`${frederickaTheGreat.className}`}>Top Products</h2>
       <ul>
-        {/* .map product card */}
-        <ProductCard />
-        <ProductCard />
-        <ProductCard />
+        {top10.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
       </ul>
     </section>
   );
