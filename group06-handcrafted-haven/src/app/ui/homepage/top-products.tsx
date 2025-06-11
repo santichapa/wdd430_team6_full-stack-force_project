@@ -1,27 +1,21 @@
 import { frederickaTheGreat } from "@/app/ui/fonts";
 import { ProductCard } from "@/app/ui/cards";
+import { PrismaClient } from '@prisma/client';
 
-// Temporary mock data; replace with fetch later
-const mockProducts = [
-  {
-    id: 1,
-    title: "Handwoven Basket",
-    description: "Beautifully handwoven basket made from natural fibers. Perfect for storage or decoration.",
-    image: "/images/handwoven-basket.jpg",
-    artist: "Nature's Touch",
-  },
-  {
-    id: 2,
-    title: "Handcrafted Mug",
-    description: "Ceramic mug with custom glazing",
-    image: "/images/mug.jpg",
-    artist: "Clay & Co.",
-  },
-];
+const prisma = new PrismaClient();
 
 export default async function TopProducts() {
-  // functionality for showing products, uses fetch to obtain data and passes it down to the cards
-  const products = mockProducts;
+  // Fetch top products from database - showing most recently created products
+  const products = await prisma.product.findMany({
+    include: {
+      artist: true, 
+    },
+    orderBy: {
+      createdAt: 'desc', 
+    },
+    take: 5, // Limit to 5 products for the homepage
+  });
+
   return (
     <section className="mt-10">
       <h2 className={`${frederickaTheGreat.className} text-3xl mb-6`}>
@@ -34,8 +28,9 @@ export default async function TopProducts() {
             id={product.id}
             title={product.title}
             description={product.description}
-            image={product.image}
-            artist={product.artist}
+            image={product.imageUrl || '/images/placeholder.jpg'} // Fallback image
+            artist={product.artist.name}
+            price={product.price}
           />
         ))}
       </ul>
