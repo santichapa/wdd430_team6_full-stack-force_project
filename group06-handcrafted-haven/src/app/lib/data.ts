@@ -9,9 +9,7 @@ export type ProductWithArtist = Product & {
 };
 
 //avoid exposing sensitive information about the artist
-export type PublicArtist = {
-  artist: Pick<User, "id" | "name" | "email" | "isArtist" | "createdAt">;
-};
+export type PublicArtist = Pick<User, "id" | "name" | "email" | "isArtist" | "createdAt" | "imageUrl">;
 
 export async function getTenProducts(): Promise<ProductWithArtist[]> {
   const products = await prisma.product.findMany({
@@ -23,10 +21,18 @@ export async function getTenProducts(): Promise<ProductWithArtist[]> {
 }
 
 // Fetch all artists
-export async function getAllArtists() {
+export async function getAllArtists(): Promise<PublicArtist[]> {
   return prisma.user.findMany({
     where: { isArtist: true },
     orderBy: { name: "asc" },
+    select: {
+      id: true,
+      name: true,
+      email: true,
+      isArtist: true,
+      createdAt: true,
+      imageUrl: true,
+    },
   });
 }
 

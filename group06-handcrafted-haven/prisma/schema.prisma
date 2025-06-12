@@ -11,13 +11,16 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(uuid())
-  name      String
-  email     String   @unique
-  password  String
-  isArtist  Boolean  @default(false)
-  products  Product[]
-  createdAt DateTime @default(now())
+  id          String    @id @default(uuid())
+  name        String
+  email       String    @unique
+  password    String
+  imageUrl    String?
+  isArtist    Boolean   @default(false)
+  products    Product[]
+  reviews     Review[]
+  createdAt   DateTime  @default(now())
+  description String    @default("")
 }
 
 model Product {
@@ -30,4 +33,16 @@ model Product {
   artistId    String
   createdAt   DateTime @default(now())
   timesViewed Int      @default(0)
+  reviews     Review[]
+}
+
+model Review {
+  id        String   @id @default(uuid())
+  rating    Int      // 1-5 star rating
+  comment   String
+  userId    String
+  productId String
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id])
+  product   Product  @relation(fields: [productId], references: [id])
 }
