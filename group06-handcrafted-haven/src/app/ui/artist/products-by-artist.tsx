@@ -1,6 +1,16 @@
 import { ProductCard } from "@/app/ui/cards";
 import { PrismaClient } from '@prisma/client';
 
+type ProductWithArtist = {
+  id: string;
+  title: string;
+  description: string;
+  imageUrl: string | null;
+  price: number;
+  artist: {
+    name: string;
+  };
+};
 const prisma = new PrismaClient();
 
 interface ProductsByArtistProps {
@@ -31,17 +41,17 @@ export default async function ProductsByArtist({ artistId }: ProductsByArtistPro
         <p className="text-gray-600">This artist hasn&apos;t created any products yet.</p>
       ) : (
         <ul className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {products.map((product) => (
-            <ProductCard
-              key={product.id}
-              id={product.id}
-              title={product.title}
-              description={product.description}
-              image={product.imageUrl || '/images/placeholder.jpg'}
-              artist={product.artist.name}
-              price={product.price}
-            />
-          ))}
+    {products.map((product: ProductWithArtist) => (
+      <ProductCard
+        key={product.id}
+        id={product.id}
+        title={product.title}
+        description={product.description}
+        image={product.imageUrl || '/images/placeholder.jpg'}
+        artist={product.artist.name}
+        price={product.price}
+      />
+    ))}
         </ul>
       )}
     </section>
