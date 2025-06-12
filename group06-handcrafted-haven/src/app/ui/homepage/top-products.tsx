@@ -7,8 +7,12 @@ export default async function TopProducts() {
 
   return (
     <section>
-      <h2 className={`${frederickaTheGreat.className}`}>Top Products</h2>
-      <ul>
+      <h2
+        className={`${frederickaTheGreat.className} text-4xl md:text-5xl text-mango4 mb-8 text-center tracking-wide drop-shadow`}
+      >
+        Top Products
+      </h2>
+      <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {top10.map((product) => (
           <ProductCard key={product.id} product={product} />
         ))}
