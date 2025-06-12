@@ -6,7 +6,7 @@ const prisma = new PrismaClient();
 export type PublicArtist = {
   id: string;
   name: string;
-  imageUrl?: string;
+  imageUrl?: string | null;  
   description: string;
   isArtist: boolean;
 };
@@ -23,7 +23,7 @@ export type ProductWithArtist = {
   artist: {
     id: string;
     name: string;
-    imageUrl?: string;
+    imageUrl?: string | null;  
   };
 };
 
@@ -35,7 +35,6 @@ export async function getTenProducts(): Promise<ProductWithArtist[]> {
         select: {
           id: true,
           name: true,
-          imageUrl: true,
         },
       },
     },
@@ -43,7 +42,7 @@ export async function getTenProducts(): Promise<ProductWithArtist[]> {
       createdAt: 'desc',
     },
     take: 10,
-  });
+  }) as ProductWithArtist[];
 }
 
 export async function getArtists(): Promise<PublicArtist[]> {
@@ -54,7 +53,6 @@ export async function getArtists(): Promise<PublicArtist[]> {
     select: {
       id: true,
       name: true,
-      imageUrl: true,
       description: true,
       isArtist: true,
     },
