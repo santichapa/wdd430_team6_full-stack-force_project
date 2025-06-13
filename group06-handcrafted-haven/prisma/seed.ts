@@ -2,6 +2,22 @@ import { PrismaClient } from '@prisma/client';
 const prisma = new PrismaClient();
 
 async function main() {
+    // First, create the artist/user
+    const artist = await prisma.user.upsert({
+    where: { email: 'artist@example.com' },
+    update: {},
+    create: {
+        id: 'ccf2e5c3-9356-4d0e-b19d-dbc855815810',
+        name: 'Artisan Creator',
+        email: 'artist@example.com',
+        password: 'hashedpassword',
+        isArtist: true,
+        description: 'Passionate creator of handmade crafts and artistic pieces.',
+    },
+    });
+
+    console.log('Created artist:', artist.name);
+
     console.log("Seed script started");
   const products = [
     {

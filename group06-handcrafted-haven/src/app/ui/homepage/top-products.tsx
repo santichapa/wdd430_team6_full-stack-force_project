@@ -1,9 +1,32 @@
 import { frederickaTheGreat } from "@/app/ui/fonts";
 import { ProductCard } from "@/app/ui/cards";
-import { getTenProducts } from "@/app/lib/data";
+import { PrismaClient } from '@prisma/client';
+
+
+type ProductWithArtist = {
+  id: string;
+  title: string;
+  description: string;
+  imageUrl: string | null;
+  price: number;
+  artist: {
+    name: string;
+  };
+};
+
+const prisma = new PrismaClient();
 
 export default async function TopProducts() {
-  const top10 = await getTenProducts();
+  // Fetch top products from database - showing most recently created products
+  const products = await prisma.product.findMany({
+    include: {
+      artist: true, 
+    },
+    orderBy: {
+      createdAt: 'desc', 
+    },
+    take: 10, 
+  });
 
   return (
     <section>
@@ -13,9 +36,17 @@ export default async function TopProducts() {
         Top Products
       </h2>
       <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {top10.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
+      {products.map((product: ProductWithArtist) => (
+        <ProductCard
+          key={product.id}
+          id={product.id}
+          title={product.title}
+          description={product.description}
+          image={product.imageUrl || '/images/placeholder.jpg'}
+          artist={product.artist.name}
+          price={product.price}
+        />
+      ))}
       </ul>
     </section>
   );

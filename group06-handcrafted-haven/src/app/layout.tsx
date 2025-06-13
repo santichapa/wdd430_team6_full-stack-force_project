@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Navbar from "@/app/ui/navbar";
+import NavBar from "@/components/NavBar"; 
+
 
 export const metadata: Metadata = {
   title: "Handcrafted Haven",
@@ -15,8 +16,8 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-mango1 min-h-screen font-sans max-w-[1400px] mx-auto flex flex-col">
-        <Navbar />
-        <main className="flex flex-col items-center justify-center min-h-[calc(100vh-64px)] px-4">
+        <NavBar />
+        <main className="flex flex-col items-center justify-center min-h-[calc(100vh-64px)] px-4" >
           {children}
         </main>
       </body>
