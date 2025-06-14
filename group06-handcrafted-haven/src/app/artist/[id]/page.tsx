@@ -1,22 +1,22 @@
 import ProductsByArtist from "@/app/ui/artist/products-by-artist";
 import { frederickaTheGreat } from "@/app/ui/fonts";
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from "@prisma/client";
 import { notFound } from "next/navigation";
 
 const prisma = new PrismaClient();
 
-export default async function ArtistPage({ 
-  params 
-}: { 
-  params: Promise<{ id: string }> 
+export default async function ArtistPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  
+
   // Fetch the artist information
   const artist = await prisma.user.findUnique({
     where: {
       id: id,
-      isArtist: true, 
+      isArtist: true,
     },
   });
 
@@ -28,19 +28,21 @@ export default async function ArtistPage({
   return (
     <main className="p-6">
       <div className="mb-8">
-        {/* artist profile picture, maybe centered? */}
         <section className="text-center mb-8">
           <h1 className={`${frederickaTheGreat.className} text-4xl mb-2`}>
             {artist.name}
           </h1>
-          <h2 className="text-xl text-gray-600 mb-4">@{artist.email.split('@')[0]}</h2>
-          <p className="text-gray-700 max-w-2xl mx-auto">
-            Welcome to {artist.name}&apos;s handcrafted collection. Each piece is carefully 
-            crafted with attention to detail and passion for the art.
+          <h2 className="text-xl text-600 mb-4">
+            @{artist.email.split("@")[0]}
+          </h2>
+          <p className="text-700 max-w-2xl mx-auto">
+            Welcome to {artist.name}&apos;s handcrafted collection. Each piece
+            is carefully crafted with attention to detail and passion for the
+            art.
           </p>
         </section>
       </div>
-      
+
       <ProductsByArtist artistId={id} />
     </main>
   );
