@@ -32,7 +32,7 @@ export function ProductCard({
           />
         </div>
         <h3 className="text-lg font-semibold text-mango4 mb-1">{title}</h3>
-        <p className="text-mango3 text-sm mb-2 text-center">{description}</p>
+        <p className="text-dark text-sm mb-2 text-center">{description}</p>
         <div className="flex justify-between items-center w-full">
           <span className="text-mango2 font-bold">${price.toFixed(2)}</span>
           <span className="text-xs text-mango4">By {artist}</span>
@@ -73,7 +73,7 @@ export function ArtistCard({ artist }: { artist: PublicArtist }) {
           )}
         </div>
         <h3 className="text-lg font-semibold text-mango4">{artist.name}</h3>
-        <p className="text-mango3 text-sm">{artist.email}</p>
+        <p className="text-dark text-sm">{artist.email}</p>
       </Link>
     </li>
   );

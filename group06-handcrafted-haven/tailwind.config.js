@@ -14,7 +14,7 @@ module.exports = {
         mango1: "#F8EDEB",
         mango2: "#FEC89A",
         mango3: "#F1CEBE",
-        mango4: "#F49595",
+        mango4: "#C14E4E",
         mango5: "#FCD5CE",
       },
       fontFamily: {
@@ -22,7 +22,7 @@ module.exports = {
         sans: ["Arial", "Helvetica", "sans-serif"],
       },
       maxWidth: {
-        '2xl': '1400px', // Use '2xl' instead of 'screen-2xl' for Tailwind v3
+        "2xl": "1400px", // Use '2xl' instead of 'screen-2xl' for Tailwind v3
       },
     },
   },

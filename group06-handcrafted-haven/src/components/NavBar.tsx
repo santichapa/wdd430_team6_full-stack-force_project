@@ -11,7 +11,7 @@ export default function NavBar() {
   const pathname = usePathname();
 
   // Hide search bar on products page since it has its own advanced search
-  const shouldShowSearch = !pathname.startsWith('/products');
+  const shouldShowSearch = !pathname.startsWith("/products");
 
   const handleSearch = () => {
     if (searchQuery.trim()) {
@@ -27,7 +27,11 @@ export default function NavBar() {
   };
 
   return (
-    <nav className="py-2 px-4 bg-white border-b border-mango3" role="navigation" aria-label="Main navigation">
+    <nav
+      className="py-2 px-4 bg-white border-b border-mango3"
+      role="navigation"
+      aria-label="Main navigation"
+    >
       <div className="max-w-[1400px] mx-auto flex items-center gap-4">
         {/* Logo */}
         <Link
@@ -42,7 +46,13 @@ export default function NavBar() {
         {/* Search Section - Hidden on products page */}
         {shouldShowSearch && (
           <div className="flex-1 max-w-2xl mx-2 md:mx-8" role="search">
-            <form onSubmit={(e) => { e.preventDefault(); handleSearch(); }} className="flex">
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                handleSearch();
+              }}
+              className="flex"
+            >
               <label htmlFor="navbar-search" className="sr-only">
                 Search for handcrafted products
               </label>
@@ -57,7 +67,8 @@ export default function NavBar() {
                 aria-describedby="search-help"
               />
               <span id="search-help" className="sr-only">
-                Enter keywords to search for products, then press enter or click search button
+                Enter keywords to search for products, then press enter or click
+                search button
               </span>
               <button
                 type="submit"
@@ -66,7 +77,9 @@ export default function NavBar() {
                 aria-label="Search products"
               >
                 <span className="hidden sm:inline">Search</span>
-                <span className="sm:hidden" aria-hidden="true">🔍</span>
+                <span className="sm:hidden" aria-hidden="true">
+                  🔍
+                </span>
               </button>
             </form>
           </div>
@@ -83,10 +96,10 @@ export default function NavBar() {
             Products
           </Link>
           <Link
-            href="#"
+            href="/artist"
             className="hover:text-white hover:bg-mango4 focus:text-white focus:bg-mango4 focus:outline-none focus:ring-2 focus:ring-mango2 focus:ring-offset-2 px-2 md:px-3 py-1.5 rounded transition text-sm md:text-base"
             role="menuitem"
-            aria-label="View artists (coming soon)"
+            aria-label="View artists"
             aria-disabled="true"
           >
             <span className="hidden sm:inline">Artists</span>
@@ -100,7 +113,9 @@ export default function NavBar() {
             aria-disabled="true"
           >
             <span className="hidden sm:inline">Sign In</span>
-            <span className="sm:hidden" aria-hidden="true">👤</span>
+            <span className="sm:hidden" aria-hidden="true">
+              👤
+            </span>
           </Link>
         </div>
       </div>
