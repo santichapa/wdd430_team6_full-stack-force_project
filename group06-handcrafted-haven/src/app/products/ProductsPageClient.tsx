@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 import { frederickaTheGreat } from "@/app/ui/fonts";
 import { ProductCard } from "@/app/ui/cards";
 
@@ -19,9 +19,12 @@ interface ProductsPageClientProps {
   initialProducts: ProductWithArtist[];
 }
 
-export default function ProductsPageClient({ initialProducts }: ProductsPageClientProps) {
-  const [filteredProducts, setFilteredProducts] = useState<ProductWithArtist[]>(initialProducts);
-  
+export default function ProductsPageClient({
+  initialProducts,
+}: ProductsPageClientProps) {
+  const [filteredProducts, setFilteredProducts] =
+    useState<ProductWithArtist[]>(initialProducts);
+
   // Filter states
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -36,14 +39,14 @@ export default function ProductsPageClient({ initialProducts }: ProductsPageClie
     "Woodwork",
     "Jewelry & Accessories",
     "Home Decor",
-    "Art & Paintings"
+    "Art & Paintings",
   ];
 
   const sortOptions = [
     { value: "newest", label: "Newest First" },
     { value: "price_low", label: "Price: Low to High" },
     { value: "price_high", label: "Price: High to Low" },
-    { value: "name", label: "Name A-Z" }
+    { value: "name", label: "Name A-Z" },
   ];
 
   // Apply filters whenever filter states change
@@ -53,30 +56,49 @@ export default function ProductsPageClient({ initialProducts }: ProductsPageClie
 
       // Text search
       if (searchQuery.trim()) {
-        filtered = filtered.filter(product =>
-          product.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          product.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          product.artist.name.toLowerCase().includes(searchQuery.toLowerCase())
+        filtered = filtered.filter(
+          (product) =>
+            product.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            product.description
+              .toLowerCase()
+              .includes(searchQuery.toLowerCase()) ||
+            product.artist.name
+              .toLowerCase()
+              .includes(searchQuery.toLowerCase())
         );
       }
 
       // Category filter
       if (selectedCategory && selectedCategory !== "All Categories") {
         const categoryKeywords: Record<string, string[]> = {
-          "Pottery & Ceramics": ["ceramic", "pottery", "clay", "mug", "plate", "vase"],
-          "Textiles & Fabric": ["textile", "fabric", "scarf", "cushion", "embroidered"],
-          "Woodwork": ["wood", "wooden", "carved", "spoon", "chess"],
+          "Pottery & Ceramics": [
+            "ceramic",
+            "pottery",
+            "clay",
+            "mug",
+            "plate",
+            "vase",
+          ],
+          "Textiles & Fabric": [
+            "textile",
+            "fabric",
+            "scarf",
+            "cushion",
+            "embroidered",
+          ],
+          Woodwork: ["wood", "wooden", "carved", "spoon", "chess"],
           "Jewelry & Accessories": ["jewelry", "necklace", "bracelet", "ring"],
           "Home Decor": ["candle", "basket", "decor", "home"],
-          "Art & Paintings": ["art", "painting", "canvas"]
+          "Art & Paintings": ["art", "painting", "canvas"],
         };
 
         const keywords = categoryKeywords[selectedCategory] || [];
         if (keywords.length > 0) {
-          filtered = filtered.filter(product =>
-            keywords.some(keyword =>
-              product.title.toLowerCase().includes(keyword) ||
-              product.description.toLowerCase().includes(keyword)
+          filtered = filtered.filter((product) =>
+            keywords.some(
+              (keyword) =>
+                product.title.toLowerCase().includes(keyword) ||
+                product.description.toLowerCase().includes(keyword)
             )
           );
         }
@@ -84,23 +106,25 @@ export default function ProductsPageClient({ initialProducts }: ProductsPageClie
 
       // Artist filter
       if (selectedArtist.trim()) {
-        filtered = filtered.filter(product =>
-          product.artist.name.toLowerCase().includes(selectedArtist.toLowerCase())
+        filtered = filtered.filter((product) =>
+          product.artist.name
+            .toLowerCase()
+            .includes(selectedArtist.toLowerCase())
         );
       }
 
       // Sort products
       filtered.sort((a, b) => {
         switch (sortBy) {
-          case 'price_low':
+          case "price_low":
             return a.price - b.price;
-          case 'price_high':
+          case "price_high":
             return b.price - a.price;
-          case 'name':
+          case "name":
             return a.title.localeCompare(b.title);
-          case 'newest':
+          case "newest":
           default:
-            return 0; 
+            return 0;
         }
       });
 
@@ -122,36 +146,57 @@ export default function ProductsPageClient({ initialProducts }: ProductsPageClie
       <div className="max-w-[1400px] mx-auto px-4 py-8">
         {/* Page Header */}
         <header className="text-center mb-8">
-          <h1 className={`${frederickaTheGreat.className} text-5xl text-mango4 mb-4`}>
+          <h1
+            className={`${frederickaTheGreat.className} text-5xl text-mango4 mb-4`}
+          >
             All Products
           </h1>
-          <p className="text-lg text-mango3 max-w-2xl mx-auto mb-6">
-            Browse our complete collection of handcrafted treasures. 
-            Each piece is lovingly made by skilled artisans with attention to detail and passion.
+          <p className="text-lg text-dark max-w-2xl mx-auto mb-6">
+            Browse our complete collection of handcrafted treasures. Each piece
+            is lovingly made by skilled artisans with attention to detail and
+            passion.
           </p>
-          <p className="text-mango4 font-medium" aria-live="polite" aria-atomic="true">
-            Showing {filteredProducts.length} of {initialProducts.length} products
+          <p
+            className="text-mango4 font-medium"
+            aria-live="polite"
+            aria-atomic="true"
+          >
+            Showing {filteredProducts.length} of {initialProducts.length}{" "}
+            products
           </p>
         </header>
 
         {/* Advanced Search & Filters */}
-        <section className="bg-white rounded-lg border border-mango3 p-6 mb-8" aria-labelledby="filter-heading">
+        <section
+          className="bg-white rounded-lg border border-mango3 p-6 mb-8"
+          aria-labelledby="filter-heading"
+        >
           <div className="flex items-center justify-between mb-4">
-            <h2 id="filter-heading" className="text-lg font-semibold text-mango4">Search & Filter Products</h2>
+            <h2
+              id="filter-heading"
+              className="text-lg font-semibold text-mango4"
+            >
+              Search & Filter Products
+            </h2>
             <button
               onClick={() => setShowFilters(!showFilters)}
               className="px-4 py-2 bg-mango4 text-white rounded-lg hover:bg-mango2 focus:bg-mango2 focus:outline-none focus:ring-2 focus:ring-mango2 focus:ring-offset-2 transition-colors"
               aria-expanded={showFilters}
               aria-controls="advanced-filters"
-              aria-label={showFilters ? 'Hide advanced filters' : 'Show advanced filters'}
+              aria-label={
+                showFilters ? "Hide advanced filters" : "Show advanced filters"
+              }
             >
-              {showFilters ? 'Hide Filters' : 'Show Filters'}
+              {showFilters ? "Hide Filters" : "Show Filters"}
             </button>
           </div>
 
           {/* Main Search */}
           <div className="mb-4">
-            <label htmlFor="product-search" className="block text-sm font-medium text-mango4 mb-2">
+            <label
+              htmlFor="product-search"
+              className="block text-sm font-medium text-mango4 mb-2"
+            >
               Search Products
             </label>
             <input
@@ -160,30 +205,36 @@ export default function ProductsPageClient({ initialProducts }: ProductsPageClie
               placeholder="Search products, descriptions, or artists..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full px-4 py-3 border border-mango3 rounded-lg focus:outline-none focus:ring-2 focus:ring-mango2 focus:border-mango2"
+              className="bg-mango1 text-dark w-full px-4 py-3 border border-mango3 rounded-lg focus:outline-none focus:ring-2 focus:ring-mango2 focus:border-mango2"
               aria-describedby="search-description"
             />
             <p id="search-description" className="sr-only">
-              Enter keywords to search through product names, descriptions, and artist names
+              Enter keywords to search through product names, descriptions, and
+              artist names
             </p>
           </div>
 
           {/* Advanced Filters */}
-          <div 
+          <div
             id="advanced-filters"
-            className={`${showFilters ? 'block' : 'hidden'} grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pt-4 border-t border-mango3`}
+            className={`${
+              showFilters ? "block" : "hidden"
+            } grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 pt-4 border-t border-mango3`}
             aria-hidden={!showFilters}
           >
             {/* Category */}
             <div>
-              <label htmlFor="category-filter" className="block text-sm font-medium text-mango4 mb-2">
+              <label
+                htmlFor="category-filter"
+                className="block text-sm font-medium text-mango4 mb-2"
+              >
                 Category
               </label>
               <select
                 id="category-filter"
                 value={selectedCategory}
                 onChange={(e) => setSelectedCategory(e.target.value)}
-                className="w-full px-3 py-2 border border-mango3 rounded-lg focus:outline-none focus:ring-2 focus:ring-mango2 focus:border-mango2"
+                className="bg-mango1 text-dark w-full px-3 py-2 border border-mango3 rounded-lg focus:outline-none focus:ring-2 focus:ring-mango2 focus:border-mango2"
                 aria-describedby="category-help"
               >
                 {categories.map((category) => (
@@ -199,7 +250,10 @@ export default function ProductsPageClient({ initialProducts }: ProductsPageClie
 
             {/* Artist */}
             <div>
-              <label htmlFor="artist-filter" className="block text-sm font-medium text-mango4 mb-2">
+              <label
+                htmlFor="artist-filter"
+                className="block text-sm font-medium text-mango4 mb-2"
+              >
                 Artist
               </label>
               <input
@@ -208,7 +262,7 @@ export default function ProductsPageClient({ initialProducts }: ProductsPageClie
                 placeholder="Search by artist name..."
                 value={selectedArtist}
                 onChange={(e) => setSelectedArtist(e.target.value)}
-                className="w-full px-3 py-2 border border-mango3 rounded-lg focus:outline-none focus:ring-2 focus:ring-mango2 focus:border-mango2"
+                className="bg-mango1 text-dark w-full px-3 py-2 border border-mango3 rounded-lg focus:outline-none focus:ring-2 focus:ring-mango2 focus:border-mango2"
                 aria-describedby="artist-help"
               />
               <p id="artist-help" className="sr-only">
@@ -218,14 +272,17 @@ export default function ProductsPageClient({ initialProducts }: ProductsPageClie
 
             {/* Sort */}
             <div>
-              <label htmlFor="sort-filter" className="block text-sm font-medium text-mango4 mb-2">
+              <label
+                htmlFor="sort-filter"
+                className="block text-sm font-medium text-mango4 mb-2"
+              >
                 Sort By
               </label>
               <select
                 id="sort-filter"
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="w-full px-3 py-2 border border-mango3 rounded-lg focus:outline-none focus:ring-2 focus:ring-mango2 focus:border-mango2"
+                className="bg-mango1 text-dark w-full px-3 py-2 border border-mango3 rounded-lg focus:outline-none focus:ring-2 focus:ring-mango2 focus:border-mango2"
                 aria-describedby="sort-help"
               >
                 {sortOptions.map((option) => (
@@ -255,7 +312,7 @@ export default function ProductsPageClient({ initialProducts }: ProductsPageClie
         {/* Products Grid */}
         <main>
           {filteredProducts.length > 0 ? (
-            <div 
+            <div
               className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
               role="region"
               aria-label="Products grid"
@@ -266,7 +323,7 @@ export default function ProductsPageClient({ initialProducts }: ProductsPageClie
                   id={product.id}
                   title={product.title}
                   description={product.description}
-                  image={product.imageUrl || '/images/placeholder.jpg'}
+                  image={product.imageUrl || "/images/placeholder.jpg"}
                   artist={product.artist.name}
                   price={product.price}
                 />
@@ -276,10 +333,15 @@ export default function ProductsPageClient({ initialProducts }: ProductsPageClie
             /* No Products State */
             <div className="text-center py-16" role="status" aria-live="polite">
               <div className="max-w-md mx-auto">
-                <div className="text-6xl mb-4" aria-hidden="true">🔍</div>
-                <h2 className="text-2xl font-bold text-mango4 mb-4">No Products Found</h2>
-                <p className="text-mango3 mb-6">
-                  Try adjusting your search or filters to find what you&apos;re looking for.
+                <div className="text-6xl mb-4" aria-hidden="true">
+                  🔍
+                </div>
+                <h2 className="text-2xl font-bold text-mango4 mb-4">
+                  No Products Found
+                </h2>
+                <p className="text-dark mb-6">
+                  Try adjusting your search or filters to find what you&apos;re
+                  looking for.
                 </p>
                 <button
                   onClick={clearFilters}
@@ -295,22 +357,30 @@ export default function ProductsPageClient({ initialProducts }: ProductsPageClie
 
         {/* Category Quick Links */}
         {initialProducts.length > 0 && (
-          <aside className="mt-12 text-center" aria-labelledby="quick-categories">
+          <aside
+            className="mt-12 text-center"
+            aria-labelledby="quick-categories"
+          >
             <div className="bg-white rounded-lg border border-mango3 p-6">
-              <h3 id="quick-categories" className="font-semibold text-mango4 mb-3">Quick Category Search</h3>
+              <h3
+                id="quick-categories"
+                className="font-semibold text-mango4 mb-3"
+              >
+                Quick Category Search
+              </h3>
               <nav aria-label="Quick category navigation">
                 <div className="flex flex-wrap justify-center gap-2">
                   {[
                     "Pottery & Ceramics",
-                    "Textiles & Fabric", 
+                    "Textiles & Fabric",
                     "Woodwork",
                     "Jewelry & Accessories",
-                    "Home Decor"
+                    "Home Decor",
                   ].map((category) => (
                     <button
                       key={category}
                       onClick={() => setSelectedCategory(category)}
-                      className="px-4 py-2 bg-mango5 text-mango4 rounded-full hover:bg-mango3 hover:text-white focus:bg-mango3 focus:text-white focus:outline-none focus:ring-2 focus:ring-mango2 focus:ring-offset-2 transition-colors text-sm"
+                      className="px-4 py-2 bg-mango5 text-dark rounded-full hover:bg-mango3 hover:text-white focus:bg-mango3 focus:text-white focus:outline-none focus:ring-2 focus:ring-mango2 focus:ring-offset-2 transition-colors text-sm"
                       aria-label={`Filter products by ${category} category`}
                     >
                       {category}

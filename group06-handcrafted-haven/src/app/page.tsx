@@ -25,7 +25,7 @@ export default function HomePage() {
             >
               Welcome to Handcrafted Haven
             </h1>
-            <p className="text-lg md:text-2xl text-mango4 mt-4 font-sans font-medium italic drop-shadow">
+            <p className="text-lg md:text-2xl text-light mt-4 font-sans font-medium italic drop-shadow">
               Discover unique, artisan-made treasures
             </p>
           </div>
