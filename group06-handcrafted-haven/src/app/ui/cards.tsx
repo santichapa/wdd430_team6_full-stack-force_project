@@ -3,15 +3,22 @@ import Image from "next/image";
 import { PublicArtist } from "@/app/lib/data";
 
 interface ProductCardProps {
-  id: string; 
+  id: string;
   title: string;
   description: string;
   image: string;
   artist: string;
-  price: number; 
+  price: number;
 }
 
-export function ProductCard({ id, title, description, image, artist, price }: ProductCardProps) {
+export function ProductCard({
+  id,
+  title,
+  description,
+  image,
+  artist,
+  price,
+}: ProductCardProps) {
   return (
     <li className="bg-white rounded-xl shadow-lg hover:shadow-xl transition p-4 border border-mango3 flex flex-col items-center">
       <Link href={`/products/${id}`} className="block w-full">
@@ -38,27 +45,36 @@ export function ProductCard({ id, title, description, image, artist, price }: Pr
 export function ArtistCard({ artist }: { artist: PublicArtist }) {
   return (
     <li className="bg-white rounded-xl shadow-lg hover:shadow-xl transition p-4 border border-mango3 flex flex-col items-center">
-      <div className="h-20 w-20 mb-2 rounded-full overflow-hidden bg-mango5 flex items-center justify-center">
-        {artist.imageUrl ? (
-          <Image
-            src={artist.imageUrl && typeof artist.imageUrl === 'string' ? artist.imageUrl : '/images/placeholder.jpg'}
-            alt={artist.name}
-            width={80}
-            height={80}
-            className="object-cover w-full h-full"
-          />
-        ) : (
-          <Image
-            src="/images/placeholder-image-200.webp"
-            alt="Placeholder"
-            width={80}
-            height={80}
-            className="object-cover w-full h-full"
-          />
-        )}
-      </div>
-      <h3 className="text-lg font-semibold text-mango4">{artist.name}</h3>
-      <p className="text-mango3 text-sm">{artist.email}</p>
+      <Link
+        href={`/artist/${artist.id}`}
+        className="flex flex-col items-center w-full"
+      >
+        <div className="h-20 w-20 mb-2 rounded-full overflow-hidden bg-mango5 flex items-center">
+          {artist.imageUrl ? (
+            <Image
+              src={
+                artist.imageUrl && typeof artist.imageUrl === "string"
+                  ? artist.imageUrl
+                  : "/images/placeholder.jpg"
+              }
+              alt={artist.name}
+              width={80}
+              height={80}
+              className="object-cover w-full h-full"
+            />
+          ) : (
+            <Image
+              src="/images/placeholder-image-200.webp"
+              alt="Placeholder"
+              width={80}
+              height={80}
+              className="object-cover w-full h-full"
+            />
+          )}
+        </div>
+        <h3 className="text-lg font-semibold text-mango4">{artist.name}</h3>
+        <p className="text-mango3 text-sm">{artist.email}</p>
+      </Link>
     </li>
   );
 }

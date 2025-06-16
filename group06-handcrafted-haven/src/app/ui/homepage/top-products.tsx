@@ -25,7 +25,7 @@ export default async function TopProducts() {
     orderBy: {
       createdAt: 'desc', 
     },
-    take: 10, 
+    take: 4, 
   });
 
   return (
