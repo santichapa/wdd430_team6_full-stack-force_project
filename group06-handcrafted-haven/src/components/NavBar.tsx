@@ -11,7 +11,7 @@ export default function NavBar() {
   const [searchQuery, setSearchQuery] = useState("");
   const router = useRouter();
   const pathname = usePathname();
-  const { data: session, status } = useSession();
+  // const { data: session, status } = useSession();
 
   // Hide search bar on products page since it has its own advanced search
   const shouldShowSearch = !pathname.startsWith("/products");
