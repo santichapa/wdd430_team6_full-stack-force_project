@@ -4,13 +4,14 @@ import Link from "next/link";
 import { useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { frederickaTheGreat } from "@/app/ui/fonts";
-import { useSession, signIn, signOut } from "next-auth/react";
+// import { useSession } from "next-auth/react";
+// import { useSession, signIn, signOut } from "next-auth/react";
 
 export default function NavBar() {
   const [searchQuery, setSearchQuery] = useState("");
   const router = useRouter();
   const pathname = usePathname();
-  const { data: session, status } = useSession();
+  // const { data: session, status } = useSession();
 
   // Hide search bar on products page since it has its own advanced search
   const shouldShowSearch = !pathname.startsWith("/products");
@@ -121,7 +122,7 @@ export default function NavBar() {
           </Link>
         </div>
 
-        {/* User Section - Shows on all pages */}
+        {/* User Section - Shows on all pages
         <div className="ml-auto">
           {status === "loading" ? (
             <p className="text-mango4 text-sm">Loading...</p>
@@ -147,7 +148,7 @@ export default function NavBar() {
               Sign In with Google
             </button>
           )}
-        </div>
+        </div> */}
       </div>
     </nav>
   );
