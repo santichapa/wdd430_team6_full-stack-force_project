@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import NavBar from "@/components/NavBar"; 
-
+import NavBar from "@/components/NavBar";
+import ClientSessionProvider from "../components/ClientSessionProvider";
 
 export const metadata: Metadata = {
   title: "Handcrafted Haven",
@@ -16,15 +16,17 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="bg-mango1 min-h-screen font-sans max-w-[1400px] mx-auto flex flex-col">
-        <NavBar />
-        <main className="flex flex-col items-center justify-center min-h-[calc(100vh-64px)] px-4" >
-          {children}
-        </main>
+        <ClientSessionProvider>
+          <NavBar />
+          <main className="flex flex-col items-center justify-center min-h-[calc(100vh-64px)] px-4">
+            {children}
+          </main>
+        </ClientSessionProvider>
       </body>
     </html>
   );
 }
- 
+
 // export default function Layout({ children }: { children: React.ReactNode }) {
 //   return (
 //     //Editing once we decide styling

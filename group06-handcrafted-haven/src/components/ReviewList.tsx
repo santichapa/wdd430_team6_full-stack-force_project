@@ -1,3 +1,5 @@
+'use client';
+
 interface Review {
   id: string;
   rating: number;
