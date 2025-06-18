@@ -121,7 +121,7 @@ export default function NavBar() {
           </Link>
         </div>
 
-        {/* User Section - Shows on all pages */}
+        {/* User Section - Shows on all pages
         <div className="ml-auto">
           {status === "loading" ? (
             <p className="text-mango4 text-sm">Loading...</p>
@@ -147,7 +147,7 @@ export default function NavBar() {
               Sign In with Google
             </button>
           )}
-        </div>
+        </div> */}
       </div>
     </nav>
   );
