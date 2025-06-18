@@ -33,26 +33,26 @@ export default function HomePage() {
       </div>
       {/* </section> */}
 
-      {/* Top Artists Section */}
-      <section className="w-full">
-        <div className="max-w-[1400px] mx-auto bg-white rounded-xl shadow border border-mango3 p-8 mt-12 mb-8">
-          {/* <h2 className={`${frederickaTheGreat.className} text-3xl md:text-4xl text-mango4 mb-8 text-center tracking-wide`}>
-            Top Artists
-          </h2> */}
-          <Suspense fallback={<TopArtistsSkeleton />}>
-            <TopArtists />
-          </Suspense>
-        </div>
-      </section>
-
       {/* Top Products Section */}
       <section className="w-full">
-        <div className="max-w-[1400px] mx-auto bg-white rounded-xl shadow border border-mango3 p-8 mb-16">
+        <div className="max-w-[1400px] mx-auto bg-white rounded-xl shadow border border-mango3 p-8 mt-12 mb-8">
           {/* <h2 className={`${frederickaTheGreat.className} text-3xl md:text-4xl text-mango4 mb-8 text-center tracking-wide`}>
             Top Products
           </h2> */}
           <Suspense fallback={<TopProductsSkeleton />}>
             <TopProducts />
+          </Suspense>
+        </div>
+      </section>
+
+      {/* Top Artists Section */}
+      <section className="w-full">
+        <div className="max-w-[1400px] mx-auto bg-white rounded-xl shadow border border-mango3 p-8 mb-16">
+          {/* <h2 className={`${frederickaTheGreat.className} text-3xl md:text-4xl text-mango4 mb-8 text-center tracking-wide`}>
+            Top Artists
+          </h2> */}
+          <Suspense fallback={<TopArtistsSkeleton />}>
+            <TopArtists />
           </Suspense>
         </div>
       </section>

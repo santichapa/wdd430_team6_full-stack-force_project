@@ -4,11 +4,13 @@ import Link from "next/link";
 import { useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { frederickaTheGreat } from "@/app/ui/fonts";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 export default function NavBar() {
   const [searchQuery, setSearchQuery] = useState("");
   const router = useRouter();
   const pathname = usePathname();
+  const { data: session, status } = useSession();
 
   // Hide search bar on products page since it has its own advanced search
   const shouldShowSearch = !pathname.startsWith("/products");
@@ -106,7 +108,7 @@ export default function NavBar() {
             <span className="sm:hidden">Art</span>
           </Link>
           <Link
-            href="#"
+            href="/login"
             className="text-mango4 hover:text-white hover:bg-mango4 focus:text-white focus:bg-mango4 focus:outline-none focus:ring-2 focus:ring-mango2 focus:ring-offset-2 px-2 md:px-3 py-1.5 rounded transition text-sm md:text-base"
             role="menuitem"
             aria-label="Sign in to your account (coming soon)"
@@ -117,6 +119,34 @@ export default function NavBar() {
               👤
             </span>
           </Link>
+        </div>
+
+        {/* User Section - Shows on all pages */}
+        <div className="ml-auto">
+          {status === "loading" ? (
+            <p className="text-mango4 text-sm">Loading...</p>
+          ) : session ? (
+            <div className="flex items-center gap-2">
+              <span className="text-mango4 text-sm">
+                Welcome, {session.user?.name}!{" "}
+              </span>
+              <button
+                onClick={() => signOut()}
+                className="px-3 py-1 bg-mango4 text-white rounded-lg hover:bg-mango2 focus:bg-mango2 focus:outline-none focus:ring-2 focus:ring-mango2 focus:ring-offset-2 transition-colors text-sm"
+                aria-label="Sign out of your account"
+              >
+                Sign Out
+              </button>
+            </div>
+          ) : (
+            <button
+              onClick={() => signIn("google")}
+              className="px-3 py-1 bg-mango4 text-white rounded-lg hover:bg-mango2 focus:bg-mango2 focus:outline-none focus:ring-2 focus:ring-mango2 focus:ring-offset-2 transition-colors text-sm"
+              aria-label="Sign in with Google"
+            >
+              Sign In with Google
+            </button>
+          )}
         </div>
       </div>
     </nav>
