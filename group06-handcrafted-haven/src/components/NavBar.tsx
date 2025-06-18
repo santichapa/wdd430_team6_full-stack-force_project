@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { frederickaTheGreat } from "@/app/ui/fonts";
-import { useSession } from "next-auth/react";
+// import { useSession } from "next-auth/react";
 // import { useSession, signIn, signOut } from "next-auth/react";
 
 export default function NavBar() {
